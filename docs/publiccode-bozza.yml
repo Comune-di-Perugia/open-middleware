@@ -1,0 +1,31 @@
+# Bozza non indicizzabile: trasferire in /publiccode.yml dopo aver completato i campi obbligatori.
+publiccodeYmlVersion: "0"
+name: Open Middleware
+developmentStatus: development
+softwareType: standalone/backend
+platforms:
+  - linux
+description:
+  it:
+    shortDescription: Servizi per acquisire, archiviare e classificare dati e documenti.
+    longDescription: >
+      Open Middleware raccoglie dati e documenti da più applicazioni.
+      I servizi conservano i documenti e le relative classificazioni.
+      Le applicazioni possono consultare i documenti e ricevere notifiche dopo
+      il salvataggio. Il progetto include un chart Helm per la distribuzione
+      su Kubernetes; l’installazione autonoma è ancora in sviluppo.
+    features:
+      - Acquisizione di dati e documenti
+      - Archiviazione e ricerca per classificazione
+      - Notifiche dopo il salvataggio
+legal:
+  license: AGPL-3.0-only
+  mainCopyrightOwner: Comune di Perugia
+organisation:
+  name: Comune di Perugia
+  uri: urn:x-italian-pa:c_g478
+dependsOn:
+  proprietary:
+    - name: Microsoft SQL Server
+# Da confermare: url, maintenance e lingua/e dell’interfaccia in localisation.
+# La licenza dei metadati è distinta da legal.license.

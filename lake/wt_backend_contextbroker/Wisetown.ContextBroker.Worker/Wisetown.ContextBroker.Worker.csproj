@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hikyaku.Contracts" Version="9.1.2" />
+    <PackageReference Include="Hikyaku.Kaido" Version="9.4.6" />
+    <PackageReference Include="Hikyaku.Kaido.RabbitMQ" Version="9.4.6" />
+    <PackageReference Include="Hikyaku.Kaido.Stats" Version="9.4.2" />
+    <PackageReference Include="MapZilla" Version="9.1.5" />
+    <PackageReference Include="FIWARE.Orion.Client" Version="1.0.6" />
+    <PackageReference Include="Hikyaku" Version="9.4.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Composition" Version="10.0.7" />
+    <PackageReference Include="Wise.Core" Version="10.0.19011" />
+    <PackageReference Include="Wise.Tasks.Core" Version="2.1.19014" />
+    <PackageReference Include="Wise.Identity.Core" Version="2.1.19012" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="appsettings.json" />
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fiware\FiWare.SmartDataModels\FiWare.SmartDataModels.csproj" />
+  </ItemGroup>
+</Project>

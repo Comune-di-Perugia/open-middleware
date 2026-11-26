@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: isolate-open-middleware
+spec:
+  podSelector: {}
+  policyTypes: [Ingress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: open-middleware-internal
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector: {}
+{{- if .Values.ingress.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: open-middleware-ingress
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values: [keycloak{{ if .Values.gateway.enabled }}, api-gateway{{ end }}]
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ required "Impostare ingress.controllerNamespace." .Values.ingress.controllerNamespace | quote }}
+      ports:
+        - {protocol: TCP, port: {{ .Values.workloads.keycloak.port }}}
+        {{- if and .Values.gateway.enabled (ne (int .Values.workloads.keycloak.port) 8080) }}
+        - {protocol: TCP, port: 8080}
+        {{- end }}
+{{- end }}

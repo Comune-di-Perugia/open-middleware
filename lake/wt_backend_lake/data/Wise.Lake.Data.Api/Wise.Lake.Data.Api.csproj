@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MapZilla" Version="9.1.5" />
+    <PackageReference Include="Hikyaku" Version="9.4.3" />
+    <PackageReference Include="Hikyaku.Contracts" Version="9.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Composition" Version="10.0.7" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.18.0" />
+    <PackageReference Include="Wise.Core" Version="10.0.19011" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wise.Lake.Data.Core\Wise.Lake.Data.Core.csproj" />
+  </ItemGroup>
+
+</Project>

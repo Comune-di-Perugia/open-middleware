@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <RootNamespace>wisetown.lake</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hikyaku.Contracts" Version="9.1.2" />
+    <PackageReference Include="Hikyaku.Kaido" Version="9.4.6" />
+    <PackageReference Include="Hikyaku.Kaido.RabbitMQ" Version="9.4.6" />
+    <PackageReference Include="Hikyaku.Kaido.Stats" Version="9.4.2" />
+    <PackageReference Include="Hikyaku" Version="9.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.7" />
+    <PackageReference Include="Wise.Core" Version="10.0.19011" />
+    <PackageReference Include="Wise.Web" Version="10.0.19011" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\classification\Wise.Lake.Classification.Api\Wise.Lake.Classification.Api.csproj" />
+    <ProjectReference
+      Include="..\classification\Wise.Lake.Classification.Core\Wise.Lake.Classification.Core.csproj" />
+    <ProjectReference
+      Include="..\classification\Wise.Lake.Classification.Handler\Wise.Lake.Classification.Handler.csproj" />
+    <ProjectReference Include="..\data\Wise.Lake.Data.Api\Wise.Lake.Data.Api.csproj" />
+    <ProjectReference Include="..\data\Wise.Lake.Data.Core\Wise.Lake.Data.Core.csproj" />
+    <ProjectReference Include="..\data\Wise.Lake.Data.Handler\Wise.Lake.Data.Handler.csproj" />
+    <ProjectReference Include="..\Wise.Lake.Core\Wise.Lake.Core.csproj" />
+  </ItemGroup>
+</Project>

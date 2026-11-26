@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework><Nullable>disable</Nullable>
+    <ImplicitUsings>false</ImplicitUsings>
+    <NoWarn>AD0001,CS8981,ASP0014</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MapZilla" Version="9.1.5" />
+    <PackageReference Include="Hikyaku" Version="9.4.3" />
+    <PackageReference Include="Hikyaku.Contracts" Version="9.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="System.Composition" Version="10.0.7" />
+    <PackageReference Include="Wise.Core" Version="10.0.19011" />
+    <PackageReference Include="Wise.Lake.Core" Version="2.1.20271" />
+    <PackageReference Include="Wise.Lake.Classification.Core" Version="2.1.20271" />
+    <PackageReference Include="Wise.Web" Version="10.0.19011" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wise.Generic.Core\Wise.Generic.Core.csproj" />
+  </ItemGroup>
+
+</Project>

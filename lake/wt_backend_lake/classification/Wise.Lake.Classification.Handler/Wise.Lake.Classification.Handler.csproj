@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MapZilla" Version="9.1.5" />
+    <PackageReference Include="Hikyaku" Version="9.4.3" />
+    <PackageReference Include="Hikyaku.Contracts" Version="9.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Toolbelt.EntityFrameworkCore.IndexAttribute" Version="5.0.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.7" />
+    <PackageReference Include="Wise.Identity.Core" Version="2.1.19012" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Composition.AttributedModel" Version="10.0.7" />
+    <PackageReference Include="Wise.Core" Version="10.0.19011" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wise.Lake.Classification.Core\Wise.Lake.Classification.Core.csproj" />
+  </ItemGroup>
+
+</Project>

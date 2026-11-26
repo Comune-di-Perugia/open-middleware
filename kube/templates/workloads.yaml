@@ -1,0 +1,139 @@
+{{- $root := . }}
+{{- if ne .Values.workloads.quantumleap.enabled (index .Values.workloads "quantumleap-store").enabled }}
+{{- fail "Abilitare insieme quantumleap e quantumleap-store." }}
+{{- end }}
+{{- range $name, $work := .Values.workloads }}
+{{- if $work.enabled }}
+{{- $labels := dict "app.kubernetes.io/name" $name "app.kubernetes.io/instance" $root.Release.Name }}
+{{- if $work.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels: {{ $labels | toJson }}
+spec:
+  selector: {{ $labels | toJson }}
+  ports:
+    - name: service
+      port: {{ $work.port }}
+      targetPort: service
+{{- if $work.storage }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-pods
+  labels: {{ $labels | toJson }}
+spec:
+  clusterIP: None
+  selector: {{ $labels | toJson }}
+  ports:
+    - name: service
+      port: {{ $work.port }}
+      targetPort: service
+{{- end }}
+{{- end }}
+---
+apiVersion: apps/v1
+kind: {{ ternary "StatefulSet" "Deployment" (not (empty $work.storage)) }}
+metadata:
+  name: {{ $name }}
+  labels: {{ $labels | toJson }}
+spec:
+  replicas: 1
+  {{- if $work.storage }}
+  serviceName: {{ $name }}-pods
+  {{- else if eq $name "contextbroker" "gesenu" "classifier" }}
+  strategy:
+    type: Recreate
+  {{- end }}
+  selector:
+    matchLabels: {{ $labels | toJson }}
+  template:
+    metadata:
+      labels: {{ $labels | toJson }}
+    spec:
+      automountServiceAccountToken: false
+      {{- if eq $name "mssql" }}
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      {{- end }}
+      {{- with $root.Values.imagePullSecrets }}
+      imagePullSecrets: {{ toJson . }}
+      {{- end }}
+      {{- if $work.storage }}
+      securityContext:
+        fsGroup: {{ $work.storage.group }}
+        fsGroupChangePolicy: OnRootMismatch
+      {{- end }}
+      containers:
+        - name: {{ $name }}
+          image: {{ required (printf "Impostare workloads.%s.image a un'immagine approvata." $name) $work.image | quote }}
+          {{- with $work.args }}
+          args: {{ toJson . }}
+          {{- end }}
+          {{- with $work.envFromSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ . | quote }}
+          {{- end }}
+          {{- if or $work.env $work.secrets (eq $name "keycloak") }}
+          env:
+            {{- if eq $name "keycloak" }}
+            - name: KC_HOSTNAME
+              value: {{ printf "https://%s" (required "Impostare ingress.keycloakHost." $root.Values.ingress.keycloakHost) | quote }}
+            {{- end }}
+            {{- range $key, $value := $work.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- range $key, $ref := $work.secrets }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ index $ref 0 | quote }}
+                  key: {{ index $ref 1 | quote }}
+            {{- end }}
+          {{- end }}
+          resources:
+            {{- with $work.resources }}
+            {{- toYaml . | nindent 12 }}
+            {{- else }}
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            {{- end }}
+          {{- if $work.port }}
+          ports:
+            - name: service
+              containerPort: {{ $work.port }}
+          readinessProbe:
+            {{- if $work.readiness }}
+            httpGet:
+              path: {{ $work.readiness.path | quote }}
+              port: {{ $work.readiness.port }}
+            {{- else }}
+            tcpSocket:
+              port: service
+            {{- end }}
+            periodSeconds: 5
+          {{- end }}
+          {{- with $work.storage }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .mountPath | quote }}
+          {{- end }}
+  {{- with $work.storage }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        storageClassName: {{ required "Impostare storageClass." $root.Values.storageClass | quote }}
+        resources:
+          requests:
+            storage: {{ .size | quote }}
+  {{- end }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.idea/
+**/appsettings.Local.json
+**/appsettings.Production.json
+.env
+.env.*
+!.env.example
+kube/values.local.yaml
+kube/values-production.local.yaml

@@ -1,0 +1,32 @@
+{
+  "configurations": {
+    "API": {
+      "adapter": "netcoredbg",
+      "configuration": {
+        "name": "Lake API",
+        "request": "launch",
+        "program": "${workspaceFolder}/Wisetown.Lake/bin/Debug/net6.0/Wisetown.Lake.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/Wisetown.Lake",
+        "stopAtEntry": false,
+        "env": {
+          "ASPNET_ENVIRONMENT": "Development"
+        }
+      }
+    },
+    "Worker": {
+      "adapter": "netcoredbg",
+      "configuration": {
+        "name": "Lake Worker",
+        "request": "launch",
+        "program": "${workspaceFolder}/Wisetown.Lake.Worker/bin/Debug/net6.0/Wisetown.Lake.Worker.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/Wisetown.Lake.Worker",
+        "stopAtEntry": false,
+        "env": {
+          "DOTNET_ENVIRONMENT": "Development"
+        }
+      }
+    }
+  }
+}

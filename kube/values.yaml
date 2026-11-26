@@ -1,0 +1,134 @@
+storageClass: ""
+imagePullSecrets: []
+ingress:
+  enabled: false
+  className: ""
+  controllerNamespace: ""
+  keycloakHost: ""
+  tlsSecret: ""
+  apiHost: ""
+  apiTlsSecret: ""
+gateway:
+  enabled: false
+  image: ""
+  realm: ""
+  audience: ""
+workloads:
+  postgresql:
+    enabled: true
+    image: ""
+    port: 5432
+    storage: {size: 20Gi, mountPath: /var/lib/postgresql/data, group: 999}
+    env: {PGDATA: /var/lib/postgresql/data/pgdata}
+    secrets:
+      POSTGRES_USER: [postgresql, user]
+      POSTGRES_PASSWORD: [postgresql, password]
+  mssql:
+    enabled: true
+    image: ""
+    port: 1433
+    storage: {size: 50Gi, mountPath: /var/opt/mssql, group: 0}
+    resources:
+      requests: {cpu: "1", memory: 2Gi}
+      limits: {memory: 4Gi}
+    env: {ACCEPT_EULA: "Y"}
+    secrets:
+      MSSQL_PID: [mssql, edition]
+      MSSQL_SA_PASSWORD: [mssql, sa-password]
+  rabbitmq:
+    enabled: true
+    image: ""
+    port: 5672
+    storage: {size: 20Gi, mountPath: /var/lib/rabbitmq, group: 999}
+    env: {RABBITMQ_NODENAME: rabbit@rabbitmq-0}
+    secrets:
+      RABBITMQ_DEFAULT_USER: [rabbitmq, user]
+      RABBITMQ_DEFAULT_PASS: [rabbitmq, password]
+  mongodb:
+    enabled: true
+    image: ""
+    port: 27017
+    storage: {size: 20Gi, mountPath: /data/db, group: 999}
+    secrets:
+      MONGO_INITDB_ROOT_USERNAME: [mongodb, admin-user]
+      MONGO_INITDB_ROOT_PASSWORD: [mongodb, admin-password]
+  orion:
+    enabled: true
+    image: ""
+    port: 1026
+    env: {ORIONLD_MONGO_HOST: mongodb, ORIONLD_MONGO_DB: orion}
+    secrets:
+      ORIONLD_MONGO_USER: [orion, mongodb-user]
+      ORIONLD_MONGO_PASSWORD: [orion, mongodb-password]
+  keycloak:
+    enabled: true
+    image: ""
+    port: 8080
+    args: [start]
+    env:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgresql:5432/keycloak
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      KC_HEALTH_ENABLED: "true"
+    secrets:
+      KC_DB_USERNAME: [keycloak, db-user]
+      KC_DB_PASSWORD: [keycloak, db-password]
+      KC_BOOTSTRAP_ADMIN_USERNAME: [keycloak, admin-user]
+      KC_BOOTSTRAP_ADMIN_PASSWORD: [keycloak, admin-password]
+    readiness: {path: /health/ready, port: 9000}
+  generic:
+    enabled: false
+    image: ""
+    port: 8080
+    storage: {size: 20Gi, mountPath: /app/cache, group: 1654}
+    env:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: "8080"
+      rabbitmq__HostName: rabbitmq
+      middleware__IndexingServiceUri: http://lake:8080
+      middleware__IngestionServiceUri: http://generic:8080
+    envFromSecret: generic-runtime
+  lake:
+    enabled: false
+    image: ""
+    port: 8080
+    storage: {size: 100Gi, mountPath: /var/lib/datalake, group: 1654}
+    env:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: "8080"
+      rabbitmq__HostName: rabbitmq
+      storage-type: file
+      file-storage__RootPath: /var/lib/datalake
+    envFromSecret: lake-runtime
+  contextbroker:
+    enabled: false
+    image: ""
+    env:
+      DOTNET_ENVIRONMENT: Production
+      rabbitmq__HostName: rabbitmq
+      orion__BaseUrl: http://orion:1026
+    envFromSecret: contextbroker-runtime
+  gesenu:
+    enabled: false
+    image: ""
+    envFromSecret: gesenu-runtime
+  classifier:
+    enabled: false
+    image: ""
+    envFromSecret: classifier-runtime
+  quantumleap:
+    enabled: false
+    image: ""
+    port: 8668
+    env:
+      CRATE_HOST: quantumleap-store
+      USE_GEOCODING: "False"
+      CACHE_QUERIES: "False"
+      LOGLEVEL: INFO
+  quantumleap-store:
+    enabled: false
+    image: ""
+    port: 4200
+    args: [-Cdiscovery.type=single-node]
+    storage: {size: 50Gi, mountPath: /data, group: 1000}
