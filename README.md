@@ -8,9 +8,9 @@ Open Middleware consente a un’amministrazione di raccogliere dati e documenti 
 
 Il Comune di Perugia (`c_g478`) è il titolare del codice. Il [file LICENSE](LICENSE) contiene il testo integrale della GNU Affero General Public License, versione 3 (`AGPL-3.0-only`).
 
-Il progetto è in sviluppo. La compilazione da sorgenti e l’installazione autonoma non sono verificate. Il [documento di sviluppo](docs/sviluppo.md) descrive i comandi e le dipendenze ancora necessarie. Il [changelog](CHANGELOG.md) raccoglie le modifiche non ancora rilasciate.
+Il [documento di sviluppo](docs/sviluppo.md) descrive i comandi di compilazione e le dipendenze. Il [changelog](CHANGELOG.md) raccoglie le modifiche.
 
-I metadati del progetto sono rilasciati con licenza `CC0-1.0`. La [scheda Developers Italia](publiccode.yml) usa il formato `publiccode.yml`. Il [file SECURITY.md](SECURITY.md) descrive il canale riservato, ancora da confermare prima del rilascio.
+I metadati del progetto sono rilasciati con licenza `CC0-1.0`. La [scheda Developers Italia](publiccode.yml) usa il formato `publiccode.yml`. Il [file SECURITY.md](SECURITY.md) descrive il canale riservato per le segnalazioni di vulnerabilità.
 
 ## Manutenzione e segnalazioni
 

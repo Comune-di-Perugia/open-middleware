@@ -29,8 +29,7 @@ description:
       I servizi conservano i documenti e le relative classificazioni.
       Le applicazioni possono consultare i documenti e ricevere notifiche dopo
       il salvataggio, per esempio per aggiungere tag al documento.
-      Il progetto include un chart Helm per la distribuzione su Kubernetes;
-      l’installazione autonoma è ancora in sviluppo.
+      Il progetto include un chart Helm per la distribuzione su Kubernetes.
     features:
       - Acquisizione di dati e documenti
       - Archiviazione e ricerca per classificazione
