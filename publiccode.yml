@@ -1,0 +1,62 @@
+publiccodeYmlVersion: "0"
+
+name: Open Middleware
+url: "https://github.com/Comune-di-Perugia/open-middleware"
+
+platforms:
+  - linux
+
+categories:
+  - document-management
+  - data-collection
+
+developmentStatus: development
+softwareType: "standalone/backend"
+
+intendedAudience:
+  scope:
+    - local-authorities
+  countries:
+    - IT
+
+description:
+  it:
+    localisedName: Open Middleware
+    shortDescription: >
+      Servizi per acquisire, archiviare e classificare dati e documenti.
+    longDescription: >
+      Open Middleware raccoglie dati e documenti da più applicazioni.
+      I servizi conservano i documenti e le relative classificazioni.
+      Le applicazioni possono consultare i documenti e ricevere notifiche dopo
+      il salvataggio, per esempio per aggiungere tag al documento.
+      Il progetto include un chart Helm per la distribuzione su Kubernetes;
+      l’installazione autonoma è ancora in sviluppo.
+    features:
+      - Acquisizione di dati e documenti
+      - Archiviazione e ricerca per classificazione
+      - Notifiche dopo il salvataggio
+    documentation: "https://github.com/Comune-di-Perugia/open-middleware/blob/main/docs/architettura.md"
+
+legal:
+  license: AGPL-3.0-only
+  mainCopyrightOwner: Comune di Perugia
+
+maintenance:
+  type: "internal"
+  contacts:
+    - name: Paolo Possanzini
+      email: "p.possanzini@teamdev.it"
+      affiliation: TeamDev s.r.l.
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+
+dependsOn:
+  proprietary:
+    - name: Microsoft SQL Server
+
+organisation:
+  uri: urn:x-italian-pa:c_g478
+  name: Comune di Perugia

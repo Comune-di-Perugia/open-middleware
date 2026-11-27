@@ -10,7 +10,15 @@ Il Comune di Perugia (`c_g478`) è il titolare del codice. Il [file LICENSE](LIC
 
 Il progetto è in sviluppo. La compilazione da sorgenti e l’installazione autonoma non sono verificate. Il [documento di sviluppo](docs/sviluppo.md) descrive i comandi e le dipendenze ancora necessarie. Il [changelog](CHANGELOG.md) raccoglie le modifiche non ancora rilasciate.
 
-La [bozza della scheda Developers Italia](docs/publiccode-bozza.yml) non è pronta per l’indicizzazione. L’identità del soggetto incaricato della pubblicazione, l’indirizzo pubblico del repository, il manutentore e la licenza dei metadati restano da confermare. Il [file SECURITY.md](SECURITY.md) descrive il canale riservato da configurare prima del rilascio.
+I metadati del progetto sono rilasciati con licenza `CC0-1.0`. La [scheda Developers Italia](publiccode.yml) usa il formato `publiccode.yml`. Il [file SECURITY.md](SECURITY.md) descrive il canale riservato, ancora da confermare prima del rilascio.
+
+## Manutenzione e segnalazioni
+
+Il Comune di Perugia è il maintainer del progetto. La [scheda Developers Italia](publiccode.yml) riporta il recapito tecnico e la tipologia di manutenzione.
+
+- Le segnalazioni pubbliche (bug, richieste di funzionalità, richieste di informazioni, pull request) sono esaminate entro due giorni lavorativi con una risposta, anche parziale.
+- Le vulnerabilità non si segnalano pubblicamente. Seguire il [file SECURITY.md](SECURITY.md).
+- Le modifiche sono descritte nel [changelog](CHANGELOG.md). Le regole per i contributi sono nel [file CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Struttura
 
