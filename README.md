@@ -71,4 +71,4 @@ Per l'inizializzazione in più passaggi, disabilitare `workloads.keycloak.enable
 - **Gesenu e classificazione.** Il chart accetta immagini dedicate, ma non le fornisce. Wise.Lake contiene già un worker per la pulizia del cestino; non eseguire un secondo worker sulle stesse operazioni. Configurare sottoscrittori e permessi RabbitMQ per la classificazione e per i servizi esterni. Il chart non espone RabbitMQ fuori dal namespace.
 - **FIWARE QuantumLeap.** Il chart può distribuire QuantumLeap e il suo archivio CrateDB come opzione. Verificare le immagini compatibili e il formato delle notifiche del broker. La configurazione della sottoscrizione, o di un adattatore se necessario, non è inclusa.
 
-CityDB, Wise.Identity e Wise.Tasks non fanno parte del chart.
+
